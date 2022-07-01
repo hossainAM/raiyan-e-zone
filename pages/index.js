@@ -1,16 +1,17 @@
-import Head from 'next/head'
+import Layout from '../components/Layout';
+import ProductItem from '../components/ProductItem';
+import data from '../utils/data';
 
 const Home = () => {
   return (
     <>
-      <Head>
-        <title>Home Page</title>
-        <meta name="description" content="Raiyan E-Zone"/>
-        <meta name="author" content="Amir Hossain"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      </Head>
-
-      <h1 className="text-xl font-bold text-center mt-5">Welcome to Raiyan E-Zone!</h1>
+      <Layout title="Home Page">
+        <div className='grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4'>
+          {
+            data.products.map((product) => (<ProductItem key={product.id} product={product}></ProductItem>))
+          }
+        </div>
+      </Layout>
     </>
   );
 };

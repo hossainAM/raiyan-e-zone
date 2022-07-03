@@ -5,7 +5,7 @@ class MyDocument extends Document {
         return (
             <Html lang="en">
                 <Head>
-                    <meta name='description' content='Ameera E-Zone website with next.js'/>
+                    <meta name='description' content='Raiyan E-Zone website with next.js'/>
                     <script src="https://kit.fontawesome.com/c6b7e8cfa6.js"></script>
                 </Head>
                 <body>

@@ -1,5 +1,5 @@
 {
-  "name": "ameera-e-zone",
+  "name": "raiyan-e-zone",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -22,6 +22,7 @@
     "react-hot-toast": "^2.2.0"
   },
   "devDependencies": {
+    "@types/react": "^18.0.14",
     "autoprefixer": "^10.4.7",
     "eslint": "8.17.0",
     "eslint-config-next": "12.1.6",

@@ -11,26 +11,26 @@ const ProductItem = ({product}) => {
     return (
         <div className="card">
         <Link href={`/product/${product.id}`}>
-            <a>
+            {/* <a> */}
                 <Image 
                     src={product.img}
                     alt={product.name}
-                    width = "500"
-                    height = "300"
-                    className="rounded shadow"
+                    width = {351}
+                    height = {350}
+                    className='rounded shadow cursor-pointer'
                 />
-            </a>
+            {/* </a> */}
         </Link>
-        <div className="flex flex-col items-center justify-center p-5">
+        <div className="flex flex-col items-center justify-center p-3">
             <Link href={`/product/${product.id}`}>
-            <a>
-                <h2 className="text-lg">{product.name}</h2>
-            </a>
+                <a>
+                    <h2 className="text-lg text-center">{product.name}</h2>
+                </a>
             </Link>
             <p className="mb-2">{product.category}</p>
             <p>${product.price}</p>
            <button onClick={() => handleAddToCart(product)}
-                className='btn btn-text secondary-button mt-3'><FontAwesomeIcon className='mr-2' icon={faShoppingCart}></FontAwesomeIcon>
+                className='btn border-0 text-black primary-button mt-3'><FontAwesomeIcon className='mr-2 text-black' icon={faShoppingCart}></FontAwesomeIcon>
                 Add to Cart  
             </button>
         </div>

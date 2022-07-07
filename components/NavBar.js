@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
+import { Store } from '../utils/Store';
 
 const NavBar = () => {
+    const {state, dispatch} = useContext(Store);
+    const {cart} = state;
+
     const router = useRouter();
     const isActive = (r) => {
         if(r === router.pathname){
@@ -20,7 +24,13 @@ const NavBar = () => {
             <div className="flex-none">
                 <ul className="menu menu-horizontal p-0">
                     <li>
-                        <Link href="/cart"><a className={isActive('/cart')}> <i className="fas fa-shopping-cart -mr-2"></i>Cart</a></Link>
+                        <Link href="/cart"><a className={isActive('/cart')}> <i className="fas fa-shopping-cart -mr-2"></i>Cart
+                        {cart.cartItems.length > 0 && (
+                            <span className='ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white'>
+                                {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                            </span>
+                        )}
+                        </a></Link>
                     </li>
                     <li>
                         <Link href="/signin"><a className={isActive('/signin')}> <i className="fas fa-user -mr-2"></i>Sign in</a></Link>
@@ -33,3 +43,4 @@ const NavBar = () => {
 };
 
 export default NavBar;
+

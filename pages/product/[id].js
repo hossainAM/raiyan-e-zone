@@ -1,10 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useContext } from "react";
 import Layout from "../../components/Layout";
 import data from "../../utils/data";
+import { Store } from "../../utils/Store";
 
 const ProductDetails = () => {
+    const {state, dispatch} = useContext(Store);
+    const router = useRouter();
+
     const {query} = useRouter();
     const {id} = query;
     const product = data.products.find(p => p.id === id)
@@ -12,6 +17,12 @@ const ProductDetails = () => {
     if(!product){
         return <div>Product Not found</div>
     }
+
+    const handleAddToCart = () => {
+        dispatch({type: 'CART_ADD_ITEM', payload: {...product, quantity: 1}});
+        router.push('/cart');
+    };
+
     return (
         <Layout title={product.name}>
             <div className="py-2">
@@ -48,7 +59,7 @@ const ProductDetails = () => {
                             <div>Status</div>
                             <div>{product.stock > 0 ? 'In stock' : 'Unavailable'}</div>
                         </div>
-                        <button className="primary-button w-full">
+                        <button className="primary-button w-full" onClick={handleAddToCart}>
                             Add to cart
                         </button>
                     </div>

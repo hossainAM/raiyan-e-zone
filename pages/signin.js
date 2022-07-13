@@ -12,12 +12,12 @@ const Signin = () => {
             <section className={styles.contentWrapper}>
                 <div className={styles.formContainer}>
                     <div className={styles.containerCover}>
-                        <Image src = "https://i.ibb.co/KqM0XKZ/car.jpg"
+                        <Image src = "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/fbaf991a78bc4896a3e9ad7800abcec6_9366/Ultraboost_22_Shoes_Black_GZ0127_01_standard.jpg"
                         width = "500"
                         height = "300"
                         alt = "image"/>
                         <div className={styles.text}>
-                            <span className={styles.text-1}>Ameera E-Zone</span>
+                            <span className={styles.text-1}>Raiyan E-Zone</span>
                         </div>
                     </div>
                     <form action="#">
@@ -39,7 +39,7 @@ const Signin = () => {
                                 <div className={`${styles.button} ${styles.inputBox}`}>
                                     <input type="submit" value="Submit" />
                                 </div>
-                                <div className={`${styles.text} ${styles.signupText}`}>Don't have an account? <Link href="/signup">
+                                <div className={`${styles.text} ${styles.signupText}`}>Don&apos;t have an account? <Link href="/signup">
                                 <label>Signup now</label>
                                 </Link></div>
                             </div>

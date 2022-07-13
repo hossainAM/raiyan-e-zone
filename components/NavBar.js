@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import { Store } from '../utils/Store';
@@ -6,6 +6,10 @@ import { Store } from '../utils/Store';
 const NavBar = () => {
     const {state, dispatch} = useContext(Store);
     const {cart} = state;
+    const [cartItemsCount, setCartItemsCount] = useState(0);
+    useEffect(() => {
+        setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0))
+    }, [cart.cartItems])
 
     const router = useRouter();
     const isActive = (r) => {
@@ -25,9 +29,9 @@ const NavBar = () => {
                 <ul className="menu menu-horizontal p-0">
                     <li>
                         <Link href="/cart"><a className={isActive('/cart')}> <i className="fas fa-shopping-cart -mr-2"></i>Cart
-                        {cart.cartItems.length > 0 && (
+                        {cartItemsCount > 0 && (
                             <span className='ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white'>
-                                {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                                {cartItemsCount}
                             </span>
                         )}
                         </a></Link>

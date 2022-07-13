@@ -5,6 +5,7 @@ import { XCircleIcon } from '@heroicons/react/outline';
 import Layout from '../components/Layout';
 import { Store } from '../utils/Store';
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 
 const Cart = () => {
     const { state, dispatch } = useContext(Store);
@@ -13,7 +14,12 @@ const Cart = () => {
 
     const removeItemHandler = (item) => {
           dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
-    }
+    };
+
+    const handleUpdateCart = (item, qty) => {
+        const quantity = Number(qty);
+        dispatch({ type: 'CART_ADD_ITEM', payload: {...item, quantity} });
+    };
 
     return (
         <Layout title="Shopping Cart">
@@ -53,7 +59,13 @@ const Cart = () => {
                                         </a>
                                     </Link>
                                     </td>
-                                    <td className="p-5 text-right">{item.quantity}</td>
+                                    <td className="p-5 text-right">
+                                        <select value={item.quantity} onChange={(e) => handleUpdateCart(item, e.target.value)}>
+                                        {
+                                            [...Array(item.stock).keys()].map((num) => (<option value={num+1} key={num+1}>{num+1}</option>))
+                                        }
+                                        </select>
+                                    </td>
                                     <td className="p-5 text-right">${item.price}</td>
                                     <td className="p-5 text-center">
                                     <button onClick={() => removeItemHandler(item)}>
@@ -69,13 +81,15 @@ const Cart = () => {
                         <ul>
                             <li>
                                 <div className="pb-3 text-xl">
-                                    Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}) : $
+                                    Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)})
+                                    { ' ' } 
+                                    : $
                                     {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
                                 </div>
                             </li>
                             <li>
                                 <button
-                                    onClick={() => router.push('/shipping')}
+                                    onClick={() => router.push('signin?redirect=/shipping')}
                                     className="primary-button w-full"
                                     >
                                     Check Out
@@ -90,4 +104,4 @@ const Cart = () => {
     );
 };
 
-export default Cart;
+export default dynamic(() => Promise.resolve(Cart), {ssr:false});

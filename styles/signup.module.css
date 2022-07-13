@@ -1,0 +1,198 @@
+.contentWrapper{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #7d2ae8;
+    padding: 30px;
+}
+
+.formContainer{
+    position: relative;
+    background-color: #fff;
+    width:100%;
+    max-width: 850px;
+    padding: 40px 30px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    perspective: 2700px;
+}
+
+.formContainer .containerCover{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    width: 50%;
+    z-index: 98;
+    transition: all 1s ease;
+}
+
+.formContainer .containerCover::before{
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: #7d2ae8;
+    opacity: 0.5;
+    z-index: 100;
+}
+
+.formContainer .containerCover img{
+    position: absolute;
+    /* height: 100%;
+    width: 100%; */
+    object-fit:cover;
+    z-index: 12;
+}
+
+.formContainer .containerCover .text{
+    position: absolute;
+    z-index: 111;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+}
+
+.formContainer form{
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+}
+
+.formContainer .formContent{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.formContent .loginForm{
+    width: calc(100% / 2 - 25px);
+}
+
+form .formContent .title {
+    position: relative;
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+}
+
+form .formContent .title::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 25px;
+    background-color: #7d2ae8;
+}
+
+form .signupForm .title::before{
+    width: 20px;
+}
+
+form .formContent .inputBoxes{
+    margin-top: 30px;
+}
+
+form .formContent .inputBox{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    margin: 10px 0;
+    position: relative;
+}
+
+.formContent .inputBox input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 0 30px;
+    font-size: 16px;
+    font-weight: 500;
+    border-bottom: 2px solid rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.formContent .inputBox input:focus,
+.formContent .inputBox input:valid{
+    border-color: #7d2ae8;
+}
+
+.formContent .inputBox i{
+    position: absolute;
+    color: #7d2ae8;
+    font-size: 17px;
+}
+
+form .formContent .text{
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+form .formContent .text a{
+    color: blue;
+}
+
+form .formContent .text a:hover{
+    text-decoration: underline;
+}
+
+form .formContent .button{
+    color: #fff;
+    margin-top: 40px;
+}
+
+form .formContent .button input{
+    color: #fff;
+    background: #7d2ae8;
+    border-radius: 6px;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+form .formContent .button input:hover{
+    background: #5b13b9;
+}
+
+form .formContent label{
+    color: #5b13b9;
+    cursor: pointer;
+}
+
+form .formContent label:hover{
+    text-decoration: underline;
+}
+form .formContent .btn{
+    color: #4d0e9f;
+    font: bold;
+    cursor: pointer;
+}
+
+form .formContent .btn:hover{
+    text-decoration: underline;
+}
+
+form .formContent .loginText{
+    text-align: center;
+    margin-top: 25px;
+}
+
+@media (max-width: 730px) {
+    .formContainer .containerCover{
+        display: none;
+    }
+
+    .formContent .loginForm{
+         width: 100%;
+    }
+}

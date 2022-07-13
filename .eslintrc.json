@@ -1,4 +1,5 @@
 {
+  "env": {"browser": true, "node": true, "es6": true}, //to define Promise in cart.js page
   "extends": ["eslint:recommended", "next/core-web-vitals"]
 }
 

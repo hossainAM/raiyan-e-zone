@@ -1,9 +1,13 @@
+import { useSession } from 'next-auth/react';
 import React, { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import { Store } from '../utils/Store';
 
 const NavBar = () => {
+
+    const { status, data: session } = useSession(); //status ia flag that when we load the session we don't show the user name
+
     const {state, dispatch} = useContext(Store);
     const {cart} = state;
     const [cartItemsCount, setCartItemsCount] = useState(0);
@@ -37,7 +41,14 @@ const NavBar = () => {
                         </a></Link>
                     </li>
                     <li>
-                        <Link href="/signin"><a className={isActive('/signin')}> <i className="fas fa-user -mr-2"></i>Sign in</a></Link>
+                        {status === 'loading' 
+                        ? ('Loading') 
+                        : session?.user 
+                        ? 
+                        (session?.user?.name) 
+                        : (
+                             <Link href="/signin"><a className={isActive('/signin')}> <i className="fas fa-user -mr-2"></i>Sign in</a></Link>
+                        )}
                     </li>
                 </ul>
             </div>

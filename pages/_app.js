@@ -1,14 +1,18 @@
 import { StoreProvider } from '../utils/Store'
+import { SessionProvider } from 'next-auth/react'
 import '../styles/globals.css'
 // import { Toaster } from 'react-hot-toast';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
+  //we can get the session from pageProps
   return (
       <>
-        <StoreProvider>
-          <Component {...pageProps} />
-        {/* <Toaster/> */}
-        </StoreProvider>
+      <SessionProvider session={session}>
+          <StoreProvider>
+            <Component {...pageProps} />
+          {/* <Toaster/> */}
+          </StoreProvider>
+        </SessionProvider>
       </>
   )
 }

@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import NavBar from './NavBar';
+import { Toaster } from 'react-hot-toast';
 
 const Layout = ({title, children}) => {
 
@@ -11,6 +12,9 @@ const Layout = ({title, children}) => {
                 <meta name="author" content="Amir Hossain"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             </Head>
+
+            <Toaster/>
+
             <div className='flex min-h-screen flex-col justify-between'>
                 <NavBar></NavBar>
                 <main className='container m-auto mt-4 px-6'>

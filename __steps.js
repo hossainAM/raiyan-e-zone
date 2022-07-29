@@ -24,4 +24,13 @@
  * create nextauth.js
  * implement signin
  * use signin in signin form
+  
+ * 15. Add User Menu
+ * Check user authentication
+ * install headlessui
+ * show user menu
+ * 
+ * 16. Create Shipping page
+ * display address fields
+ * save address in context
  */

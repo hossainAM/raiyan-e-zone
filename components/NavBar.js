@@ -1,8 +1,11 @@
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import React, { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import { Store } from '../utils/Store';
+import { Menu } from '@headlessui/react'
+import DropdownLink from './DropdownLink';
+import Cookies from 'js-cookie';
 
 const NavBar = () => {
 
@@ -23,6 +26,12 @@ const NavBar = () => {
             return ''
         }
     }
+
+    const handleLogout = () => {
+        Cookies.remove('cart');
+        dispatch({ type: 'CART_RESET' });
+        signOut({ callbackUrl: '/signin' });
+    };
     return (
         <>
           <div className="navbar bg-base-100 shadow-md sticky top-0 z-50">
@@ -45,7 +54,22 @@ const NavBar = () => {
                         ? ('Loading') 
                         : session?.user 
                         ? 
-                        (session?.user?.name) 
+                        <Menu as="div" className="relative inline-block">
+                            <Menu.Button className="text-blue-600">
+                                {session?.user?.name}
+                            </Menu.Button>
+                            <Menu.Items className="absolute right-0 w-56 origin-top-right bg-white shadow-lg">
+                                <Menu.Item>
+                                    <DropdownLink className="dropdown-link" href="/profile">Profile</DropdownLink>
+                                </Menu.Item>
+                                <Menu.Item>
+                                    <DropdownLink className="dropdown-link" href="/order-history">Order History</DropdownLink>
+                                </Menu.Item>
+                                <Menu.Item>
+                                    <DropdownLink className="dropdown-link" href="#" onClick={handleLogout}>Logout</DropdownLink>
+                                </Menu.Item>
+                            </Menu.Items>
+                        </Menu> 
                         : (
                              <Link href="/signin"><a className={isActive('/signin')}> <i className="fas fa-user -mr-2"></i>Sign in</a></Link>
                         )}

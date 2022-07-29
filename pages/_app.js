@@ -1,6 +1,7 @@
 import { StoreProvider } from '../utils/Store'
-import { SessionProvider } from 'next-auth/react'
+import { SessionProvider, useSession } from 'next-auth/react'
 import '../styles/globals.css'
+import { useRouter } from 'next/router';
 // import { Toaster } from 'react-hot-toast';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
@@ -9,12 +10,34 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       <>
       <SessionProvider session={session}>
           <StoreProvider>
-            <Component {...pageProps} />
+            {Component.auth ? (
+              <Auth>
+                <Component {...pageProps} />
+              </Auth>
+            ) : (
+              <Component {...pageProps} />
+            )} 
           {/* <Toaster/> */}
           </StoreProvider>
         </SessionProvider>
       </>
-  )
+  );
+}
+
+//Auth function to control the access to only authenticated user (protected page)
+
+function Auth({ children }) {
+  const router = useRouter();
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push('/unauthorized?message=login required');
+    },
+  });
+  if(status === 'loading') {
+    return <div>Loading...</div>;
+  }
+  return children;
 }
 
 export default MyApp

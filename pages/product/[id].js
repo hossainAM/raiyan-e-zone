@@ -1,25 +1,36 @@
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext } from "react";
+import toast from "react-hot-toast";
 import Layout from "../../components/Layout";
-import data from "../../utils/data";
+import Product from "../../models/ProductDetails";
+import db from "../../utils/db";
 import { Store } from "../../utils/Store";
 
-const ProductDetails = () => {
+const ProductDetails = (props) => {
+    const { product } = props;
     const {state, dispatch} = useContext(Store);
     const router = useRouter();
-
-    const {query} = useRouter();
-    const {id} = query;
-    const product = data.products.find(p => p.id === id)
-
+   
     if(!product){
-        return <div>Product Not found</div>
+        return <Layout title="Product Not found">Product Not found</Layout>
     }
 
-    const handleAddToCart = () => {
-        dispatch({type: 'CART_ADD_ITEM', payload: {...product, quantity: 1}});
+    const handleAddToCart = async () => {
+        const existItem = state.cart.cartItems.find((item) => item.id === product.id);
+        const quantity = existItem ? existItem.quantity + 1 : 1;
+        //here we need to fetch data from back end api to check above quantity is in stock;
+
+        const { data } = await axios.get(`/api/products/${product._id}`);
+        
+        if(data.stock < quantity) {
+            toast.error('Sorry. Product is out of stock');
+            return;
+        }
+
+        dispatch({type: 'CART_ADD_ITEM', payload: {...product, quantity }});
         router.push('/cart');
     };
 
@@ -70,3 +81,19 @@ const ProductDetails = () => {
 };
 
 export default ProductDetails;
+
+//get product from database
+
+export async function getServerSideProps(context) {
+    const { params } = context;
+    const { id } = params;
+
+    await db.connect();
+    const product = await Product.findOne({ id }).lean();
+    await db.disconnect();
+    return {
+        props: {
+            product: product ? db.convertDocToObj(product) : null,
+        },
+    };
+}

@@ -37,4 +37,14 @@
  * 17. Create Payment Method page
  * display payment methods
  * save payment method in context
+ * 
+ * 18. Seed sample products
+ * insert sample products to mongodb
+ * load products from db in home and product page
+ * check product count in stock in add to cart
+ * 
+ * 19. Load products from MongoDB
+ * load products in home page from mongobd
+ * load products in product page from mongodb
+ * use product api to check count in stock in add to cart
  */

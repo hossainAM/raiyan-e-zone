@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
-const ProductItem = ({product}) => {
+const ProductItem = ({product, handleAddToCart }) => {
  
     return (
         <div className="card">
@@ -28,7 +28,11 @@ const ProductItem = ({product}) => {
             <p className="mb-2">{product.category}</p>
             <p>${product.price}</p>
            <button 
-                className='btn border-0 text-black primary-button mt-3'><FontAwesomeIcon className='mr-2 text-black' icon={faShoppingCart}></FontAwesomeIcon>
+                type="button"
+                className='btn border-0 text-black primary-button mt-3'
+                onClick={() => handleAddToCart(product)}
+                >
+                <FontAwesomeIcon className='mr-2 text-black' icon={faShoppingCart}></FontAwesomeIcon>
                 Add to Cart  
             </button>
         </div>

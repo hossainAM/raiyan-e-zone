@@ -47,4 +47,15 @@
  * load products in home page from mongobd
  * load products in product page from mongodb
  * use product api to check count in stock in add to cart
+ * 
+ * 20. Create Place Order page
+ * display shipping address
+ * display payment method
+ * display order summary
+ * implement create order
+ * 
+ * 21. Create Order Page
+ * implement backend api for order details
+ * load order data from backend
+ * display order details
  */
